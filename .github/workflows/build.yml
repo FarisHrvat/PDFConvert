@@ -11,14 +11,15 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false  
       matrix:
         os: [windows-latest, macos-latest]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: '3.12'
     
@@ -32,9 +33,10 @@ jobs:
         python -m PyInstaller --noconfirm --onefile --windowed --name PDFConverter pdf_converter.py
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: PDFConverter-${{ matrix.os }}
         path: |
           dist/PDFConverter.exe
           dist/PDFConverter.app
+        compression-level: 9  
