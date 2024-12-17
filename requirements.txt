@@ -1,0 +1,4 @@
+pyinstaller
+pymupdf
+pillow
+reportlab
